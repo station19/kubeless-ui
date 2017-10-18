@@ -6,9 +6,8 @@ jobs:
       - image: docker:17.06.0-ce-git
         environment:
           IMAGE_NAME: kubeless-ui
-          DOCKER_PROJECT: bitnami
-          QUAY_PROJECT: bitnami
-          GCLOUD_PROJECT: bitnami-containers
+          DOCKER_PROJECT: experimental
+          QUAY_PROJECT: damagehead
 
     steps:
       - checkout
@@ -45,7 +44,7 @@ jobs:
           command: |
             if [ -n "${CIRCLE_TAG}" ]; then
               curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-release-image.sh | bash -
-            elif [ "${CIRCLE_BRANCH}" == "master" ]; then
+            elif [ "${CIRCLE_BRANCH}" == "ci-sandbox" ]; then
               curl -sL https://raw.githubusercontent.com/bitnami/test-infra/master/circle/docker-development-image.sh | bash -
             fi
 
